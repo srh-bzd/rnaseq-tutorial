@@ -1,0 +1,84 @@
+# Nom de votre site
+site_name: Bioinfo training
+
+# Description facultative (utilisée dans les métadonnées et les moteurs de recherche)
+site_description: ""
+
+# URL de base (utile pour le déploiement sur GitHub Pages)
+site_url: https://srh-bzd.github.io/bioinfo-training
+
+# URL et nom du repo
+repo_url: https://github.com/srh-bzd/bioinfo-training
+repo_name: srh-bzd/bioinfo-training
+
+edit_uri: edit/main/docs/
+
+# Chemin du logo (optionnel, à ajouter dans 'docs/' ou un sous-dossier)
+# logo: images/logo.png
+
+# Thème Material (vous devez l'installer via `pip install mkdocs-material`)
+theme:
+  name: material
+  language: fr
+  features:
+    - navigation.tabs
+    - navigation.expand
+    - navigation.indexes
+    - header.autohide # "Range" le header quand on déroule
+    - announce.dismiss
+  palette:
+    - scheme: default
+      primary: black # Couleur header
+      accent: blue # Lien
+      toggle:
+        icon: material/lightbulb-night-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: black
+      accent: blue
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - toc.follow
+    - toc.integrate
+    - navigation.top
+    - content.code.copy
+    - navigation.tabs
+    - search.highlight
+
+# Configuration des plugins (inclut la recherche et les dates des révisions Git)
+plugins:
+  - search
+  - git-revision-date-localized:
+      fallback_to_build_date: true
+
+# Extensions Markdown (activent des fonctionnalités supplémentaires)
+markdown_extensions:
+  - admonition      # Pour créer des boîtes d'informations, avertissements, etc.
+  - tables          # Support avancé pour les tableaux
+  - toc             # Table des matières automatique
+  - codehilite      # Mise en surbrillance du code
+  - pymdownx.extra  # Collection d'extensions Markdown utiles
+  - pymdownx.snippets  # Réutilisation de fragments de code
+
+# Structure de la navigation (liée aux fichiers Markdown dans le dossier `docs/`)
+nav:
+  - Accueil: index.md
+  - Cours :
+    - RNAseq : lessons/rnaseq-lesson.md
+  - Analyses :
+    - RNAseq : analysis/rnaseq-training.md
+  - Connaissances :
+    - Bases de données : 
+      - RefSeq : knowledge/refseq.md
+  - À propos: about.md
+
+# Options d'exclusion (par exemple, ne pas inclure certains fichiers dans la génération)
+exclude:
+  - README.md
+  - "*.tmp"
+
+
