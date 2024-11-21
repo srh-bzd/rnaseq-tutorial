@@ -1,0 +1,1 @@
+Dans cette section, vous trouverez des formations détaillées et des analyses complètes pour vous accompagner dans vos travaux bioinformatiques. Cette section est conçue pour vous guider à travers les différentes étapes de l'analyse de données biologiques, en utilisant des outils et des méthodes.

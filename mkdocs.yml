@@ -67,13 +67,20 @@ markdown_extensions:
 # Structure de la navigation (liée aux fichiers Markdown dans le dossier `docs/`)
 nav:
   - Accueil: index.md
-  - Cours :
+  - Cours : 
+    - Vue d'ensemble : lessons/lessons.md
     - RNAseq : lessons/rnaseq-lesson.md
-  - Analyses :
+  - Analyses : 
+    - Vue d'ensemble : analysis/analysis.md
     - RNAseq : analysis/rnaseq-training.md
-  - Connaissances :
+  - Connaissances : 
+    - Vue d'ensemble : knowledge/knowledge.md
     - Bases de données : 
-      - RefSeq : knowledge/refseq.md
+      - RefSeq : knowledge/databases/refseq.md
+    - Références : 
+      - Humain :
+        - Le transcriptome : knowledge/references/human_transcriptome.md
+        - Le génome : knowledge/references/human_genome.md
   - À propos: about.md
 
 # Options d'exclusion (par exemple, ne pas inclure certains fichiers dans la génération)

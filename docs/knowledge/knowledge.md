@@ -1,0 +1,1 @@
+Dans cette section, vous trouverez des explications sur des concepts clés, des outils, des bases de données ou des fichiers couramment utilisés en bioinformatique. Elle vous permettra de mieux comprendre les essentiels à l'analyse bioinformatique.

@@ -1,0 +1,1 @@
+Dans cette section, vous accéderez à une série de cours théoriques couvrant divers aspects de la bioinformatique. Ces cours sont conçus pour vous fournir une compréhension dans le domaine. Vous trouverez donc des ressources adaptées pour approfondir vos connaissances et / ou développer vos compétences en bioinformatique.
