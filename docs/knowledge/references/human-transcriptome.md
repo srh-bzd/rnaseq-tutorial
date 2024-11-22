@@ -1,15 +1,16 @@
-# Le transcriptome Humain
+# Le transcriptome humain
 
-Le transcriptome de référence Humain est une représentation complète de tous les transcrits (ARN) exprimés dans les cellules humaines à un moment donné. Contrairement au génome, qui est fixe et identique dans toutes les cellules d'un individu, le transcriptome varie en fonction du type cellulaire, du stade de développement, des conditions environnementales, et des stimuli externes. Il constitue donc un instantané dynamique de l'expression génique dans une cellule ou un tissu.
+Le transcriptome de référence humain est une représentation complète de tous les transcrits (ARN) exprimés dans les cellules humaines à un moment donné. Contrairement au génome, qui est fixe et identique dans toutes les cellules d'un individu, le transcriptome varie en fonction du type cellulaire, du stade de développement, des conditions environnementales, et des stimuli externes. Il constitue donc un instantané dynamique de l'expression génique dans une cellule ou un tissu.
 
-La dernière version du transcriptome de référence Humain à ce jour est [GRCh38.p14](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.40/). Il est possible de la télécharger directement à l'adresse [https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/) sous le nom de fichier *GCF_000001405.40_GRCh38.p14_rna.fna.gz*.
+La dernière version du transcriptome de référence humain à ce jour est [GRCh38.p14](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.40/). Il est possible de la télécharger directement à l'adresse [https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/) sous le nom de fichier *GCF_000001405.40_GRCh38.p14_rna.fna.gz*.
 
-Nous allons voir ensemble les informations sur ce transcriptome de référence Humain.
+Nous allons voir ensemble les informations sur ce transcriptome de référence humain.
 
 ## Le nom du fichier
 
 Nous allons décortiquer le nom de fichier du transcriptome : 
-- *GRCh38* (Genome Reference Consortium Human Build 38) correspond à la version du génome Humain assemblé
+
+- *GRCh38* (Genome Reference Consortium Human Build 38) correspond à la version du génome humain assemblé
 - *p14* (patch release 14) correspond à la version 14 du patch, soit à la 14ème correction
 - *GCF_000001405.40* est l'accession RefSeq (l'équivalent en accession GenBank est GCA_000001405.29)
 - *_rna.fna.gz* correspond au format FASTA comprennant les ARN produits à partir du génome
@@ -31,41 +32,20 @@ Les ids débutant par un *N* sont des *Known RefSeq*. Ce sont des séquences man
 Comme nous l'avons vu précédement, nous avons 4 types d'accessions number correspondant à des ARNm et à des ARNnc.
 Voici le nombre de chacun d'entre eux dans le transcriptome de référence téléchargé. Les informations peuvent être retrouvées dans la table *Feature counts* de la page RefSeq de l'annotation d'[Homo sapiens](https://www.ncbi.nlm.nih.gov/refseq/annotation_euk/Homo_sapiens/GCF_000001405.40-RS_2023_10/), notamment aux lignes *mRNAs*, *non-coding RNAs* et *pseudo transcripts*.
 
-<table>
-  <tr>
-       <th colSpan="2">mRNAs</th>  
-       <th colSpan="2">ncRNAs</th>
-       <th colSpan="2">pseudo transcripts</th>
-  </tr>
-  <tr>
-       <th>NM</th>
-       <th>XM</th>
-       <th>NR</th>
-       <th>XR</th>
-       <th>NR</th>
-       <th>XR</th>
-   </tr>
-  <tr>
-       <th>67116</th>
-       <th>69065</th>
-       <th>21487</th>
-       <th>25697</th>
-       <th>1593</th>
-       <th>163</th>
-   </tr>
-  <tr>
-       <th colSpan="2">136181</th>  
-       <th colSpan="2">47184</th>
-       <th colSpan="2">1756</th>
-  </tr>
-  <tr>
-       <th colSpan="6">185121</th>  
-  </tr>
-</table>
+| mRNAs : NM | mRNAs : XM | ncRNAs : NR | ncRNAs : NR | pseudo transcripts : NR | pseudo transcripts : XR |
+|---------|----------|---------|----------|--------------------|----------|
+| 67116   | 69065    | 21487   | 25697    | 1593               | 163      |
+
+Soit un total de :
+
+- mRNAs : 136181
+- ncRNAs : 47184
+- pseudo transcripts : 1756
+
 
 ## Les isoformes
 
-Dans le transcriptome de référence Humain, les isoformes des ARN sont présents. 
+Dans le transcriptome de référence humain, les isoformes des ARN sont présents. 
 Prenons le cas du gène *MELK maternal embryonic leucine zipper kinase*. 
 Lorsque l'on effectue une recherche de ce gène dans le fichier FASTA du transcriptome, on retrouve 53 séquences de transcripts de mRNA prédits ou non et d'un ncRNA review 
 

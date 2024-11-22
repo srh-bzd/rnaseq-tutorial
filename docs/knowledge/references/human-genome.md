@@ -1,8 +1,8 @@
-# Le génome Humain
+# Le génome humain
 
-Le génome Humain de référence est une séquence de l’ADN Humain qui sert de modèle standard pour représenter l'ensemble du génome Humain. Il s'agit d'une carte génomique unifiée qui combine les séquences d'ADN provenant de plusieurs individus, utilisée pour la recherche, l'analyse clinique et la comparaison génétique.
+Le génome humain de référence est une séquence de l’ADN humain qui sert de modèle standard pour représenter l'ensemble du génome humain. Il s'agit d'une carte génomique unifiée qui combine les séquences d'ADN provenant de plusieurs individus, utilisée pour la recherche, l'analyse clinique et la comparaison génétique.
 
-La dernière version du génome de référence Humain à ce jour est [GRCh38.p14](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.40/). Il est possible de la télécharger directement à l'adresse [https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/) sous le nom de fichier *GCF_000001405.40_GRCh38.p14_genomic.fna.gz*.
+La dernière version du génome de référence humain à ce jour est [GRCh38.p14](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.40/). Il est possible de la télécharger directement à l'adresse [https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/) sous le nom de fichier *GCF_000001405.40_GRCh38.p14_genomic.fna.gz*.
 
 Nous allons voir ensemble les informations sur ce génome de référence.
 
@@ -10,7 +10,7 @@ Nous allons voir ensemble les informations sur ce génome de référence.
 
 Nous allons décortiquer le nom de fichier du génome : 
 
-- *GRCh38* (Genome Reference Consortium Human Build 38) correspond à la version du génome Humain assemblé
+- *GRCh38* (Genome Reference Consortium Human Build 38) correspond à la version du génome humain assemblé
 - *p14* (patch release 14) correspond à la version 14 du patch, soit à la 14ème correction
 - *GCF_000001405.40* est l'accession RefSeq (l'équivalent en accession GenBank est GCA_000001405.29)
 - *_genomic.fna.gz* correspond au format FASTA comprennant les ADN présent dans le génome
@@ -42,10 +42,12 @@ Nous pouvons constater avec ces exemples que les identifiants débutant par *NC_
 ## Quantification des séquences présentes
 
 Nous pouvons voir que dans le fichier FASTA du génome de référence il y a 705 séquences dont :
+
 - 25 *NC_* soit 24 chromosomes + mitochondrie
 - 355 *NT_*, unlocalized genomic scaffold, assemblées mais leur emplacement précis n'est pas déterminé avec certitude
 - 325 *NW_*, genomic scaffold, souvent utilisé comme révision ou affinage de région
 
 Ce qui comprends environ : 
+
 - 20000 à 21000 gènes codant pour des protéines
 - 10000 à 20000 gènes non codants (ARN non codants, microARN, etc.) 

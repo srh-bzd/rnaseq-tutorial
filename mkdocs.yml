@@ -32,13 +32,13 @@ theme:
       accent: blue # Lien
       toggle:
         icon: material/lightbulb-night-outline
-        name: Switch to dark mode
+        name: Mode sombre
     - scheme: slate
       primary: black
       accent: blue
       toggle:
         icon: material/lightbulb-outline
-        name: Switch to light mode
+        name: Mode clair
   icon:
     repo: fontawesome/brands/github
   features:
@@ -70,17 +70,23 @@ nav:
   - Cours : 
     - Vue d'ensemble : lessons/lessons.md
     - RNAseq : lessons/rnaseq-lesson.md
-  - Analyses : 
-    - Vue d'ensemble : analysis/analysis.md
-    - RNAseq : analysis/rnaseq-training.md
+  - Tutoriels : 
+    - Vue d'ensemble : training/training.md
+    - Analyses :
+      - RNAseq : training/rnaseq-training.md
+    - Développement :
+      - MkDocs : training/mkdocs.md
   - Connaissances : 
     - Vue d'ensemble : knowledge/knowledge.md
     - Bases de données : 
       - RefSeq : knowledge/databases/refseq.md
     - Références : 
       - Humain :
-        - Le transcriptome : knowledge/references/human_transcriptome.md
-        - Le génome : knowledge/references/human_genome.md
+        - Le transcriptome : knowledge/references/human-transcriptome.md
+        - Le génome : knowledge/references/human-genome.md
+        - Les annotations : knowledge/references/human-annotations.md
+    - Concepts :
+      - Inférence du strandedness : knowledge/concepts/rnaseq-strandedness.md
   - À propos: about.md
 
 # Options d'exclusion (par exemple, ne pas inclure certains fichiers dans la génération)

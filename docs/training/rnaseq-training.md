@@ -33,8 +33,6 @@ Pour palier à cela, il faut se rendre directement sur la page du SRA via le nav
 - Dans le dossier où il y a tous les dossiers SRA, rentrer la ligne de commande : `for dir in SRR*; do fastq-dump --split-3 --skip-technical --gzip "$dir"/"$dir".sra; done`, cela permet d'avoir les fichiers FASTQ paired-end \_1 et \_2 et unpaired compressés (voir la figure ci-dessous provenant du HowTo de [fasterq-dump](https://github.com/ncbi/sra-tools/wiki/HowTo:-fasterq-dump) qui est un fastq-dump plus rapide mais sans la possibilité de compresser directement les fichiers)
 - Supprimer les dossiers SRA pour alléger le volume données
 
-![image](https://gist.github.com/user-attachments/assets/c48eff7c-6e0f-490d-8308-e59fcc3a7463)
-
 Attention, après cette étape les *\_1* et *\_2* des noms des fichiers FASTQ ont été renommés en *_R1* et *_R2*.
 
 ## 2. Téléchargement des fichiers d'intérêts : les références
@@ -59,86 +57,18 @@ Tout comme le transcriptome de référence, nous allons également prendre en po
 
 ### 2.3. Le GTF
 
-Le GTF humain (General Feature Format) est un fichier contenant des annotations génomiques spécifiques au génome humain. Ces fichiers fournissent des informations détaillées sur la localisation des gènes, des exons, des introns et d'autres éléments fonctionnels dans le génome humain. Le GTF est identique à la version 2 du GFF (General Feature Format). Si nous téléchargeons le GTF et non le GFF c'est parce que le GTF contient les types d'intérêts pour de la transcriptomique à contrario du GFF qui contient les types d'intérêts mais également d'autres non utiles ici.
-
-#### 2.3.1. Téléchargement du GTF
+Nous allons récupérer les annotations génomiques du génome humain.
 
 - Aller sur la page du génome assemblé [GRCh38](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.40/)
 - Sélectionner l'onglet *FTP*
 - Une liste d'Index of /genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14 sera proposée (https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/)
 - Choisir *GCF_000001405.40_GRCh38.p14_genomic.gtf.gz*
 
-#### 2.3.2. Informations sur le GTF
-
-**La constitution du fichier**
-
-Contrairement aux transcriptomes et génomes de référence, le fichier GTF n'est pas constitué d'identifiants et de séquences mais de colonnes :
-- seqid, l'identifiant de la séquence où se trouve la fonctionnalité
-- source, l'algorithme ou la procédure qui a généré la fonctionnalité. Il s'agit généralement du nom d'un logiciel ou d'une base de données
-- type, le nom du type de fonctionnalité comme "gène" ou "exon"
-- start, position génomique de départ de la fonctionnalité
-- end, position génomique de fin 
-- score, valeur numérique qui indique généralement la confiance de la source dans l'entité annotée. Une valeur de "." (un point) est utilisé pour définir une valeur nulle
-- strand, indique le sens avec "+" (positif ou 5'->3'), "-", (négatif ou 3'->5'), "." (indéterminé), ou "?" pour inconnus
-- phase, la phase du CDS qui peut être 0, 1, 2 ou "."
-- attributes, attributs supplémentaires au format clé-valeur (ex. : gene_id, gene_name)
-
-**Les types présents dans le GTF**
-
-Pour voir tous les types présents avec leurs comptes, il faut lancer cette commande sur le fichier GTF dézippé :
-
-```
-awk '{a[$3]++}END{for ( i in a) print i" "a[i]}' GCF_000001405.40_GRCh38.p14_genomic.gtf
-```
-
-Voici les informations que nous obtenons :
-
-```
-Genomic 22045
- 5
-RefSeq 1
-exon 2298755
-CDS 1837053
-gene 50329
-start_codon 144663
-Genomic%2Ccmsearch 1
-stop_codon 144508
-transcript 200311
-```
-A titre informatif, voilà ce que nous pouvons en dire :
-
-- Genomic (22045) : Ce type fait généralement référence à des éléments génomiques sans spécification claire (par exemple, des régions non annotées ou des segments de séquences génomiques).
-- RefSeq (1) : Ce type fait référence à des éléments spécifiquement annotés selon le système RefSeq, qui est une base de données d'annotations génomiques maintenue par le NCBI (National Center for Biotechnology Information).
-- exon (2298755) : Les exons sont les segments de gènes qui sont exprimés et qui sont traduits en protéines. Cette annotation indique combien d'exons sont présents dans le fichier.
-- CDS (1837053) : CDS signifie Coding Sequence. Cela représente les régions du gène qui sont traduites en protéine. Cette annotation indique combien de CDS sont présents dans le fichier.
-- gene (50329) : Cette annotation indique le nombre de gènes identifiés dans le fichier GTF. Chaque gène est généralement associé à plusieurs exons et éventuellement à plusieurs transcrits.
-- start_codon (144663) : Cette annotation représente le nombre de codons de départ (ATG) présents dans le fichier. Un codon de départ marque le début de la traduction d'un ARNm en protéine.
-- stop_codon (144508) : Cette annotation représente le nombre de codons d'arrêt présents dans le fichier. Un codon d'arrêt marque la fin de la traduction.
-- transcript (200311) : Cela indique le nombre de transcrits différents présents dans le fichier GTF. Un transcrit est le produit de la transcription d'un gène, qui peut inclure des variantes d'épissage.
-- Genomic%2Ccmsearch (1) : Ce type semble être une erreur ou une annotation non standard. %2C est une représentation URL pour une virgule, ce qui peut indiquer un problème de formatage ou une entrée non intentionnelle.
-
 ## 3. Préparation des lectures
 
-### 3.1. Inférence du strandness
+### 3.1. Inférence du strandedness
 
-Les librairies RNAseq sont préparées de plusieurs façon ce qui fait que les lectures de séquençage peuvent présenter diverses caractéristiques. Les lectures présentent ainsi :
-- une orientation
-  - I = inward, vers l'intérieur (fr)
-  - O = outward, vers l'extérieur (rf) 
-  - M = matching (ff)
-- la spécificité de librairie
-  - S = stranded
-  - U = unstranded
-- la spécificité de brin (seulement dans le cas d'une librairie stranded)
-  - F = forward, dans le cas où les lectures du fichier 1 dérivent du brin ADN sens et sont donc les copies du brin anti-sens (secondstrand)
-  - R = reverse, dans le cas où les lectures du fichier 1 dérivent du brin ADN anti-sens et sont donc les copies du brin sens (firststrand)
-
-![image](https://gist.github.com/user-attachments/assets/5620a856-5538-42fe-afc8-7016566cfe1f)
-(voir la page de documentation de [Salmon](https://salmon.readthedocs.io/en/latest/library_type.html))
-
-Les outils RNAseq d'assemblage et de comptage intègrent ces informations via un paramètre. Une utilisation incorrecte de ce paramètre peut avoir un impact sur le résultat des analyses RNA-Seq, notamment la perte de lectures lors d'alignement contre une référence et l'obtention de faux positifs et négatifs dans les résultats d'expression différentielle.
-
-Nous allons donc déterminer les spécifités des librairies avec Salmon (v1.10.1) et le transcriptome de référence pour pouvoir renseigner correctement les paramètres d'outils.
+Nous allons déterminer les spécifités des librairies avec Salmon (v1.10.1) et le transcriptome de référence pour pouvoir renseigner correctement les paramètres d'outils.
 Puisque les données ont été séquencées au même moment par le même séquenceur avec la même préparation de librairie, nous n'avons pas besoin d'effectuer cette manipulation pour chaque SRA.
 Voici les lignes de commande : 
 ```
@@ -155,21 +85,13 @@ gzip "$WORKDIR"/GCF_000001405.40_GRCh38.p14_rna.fna
 ```
 
 Ici, l'option :
+
 - `-l` permet de renseigner le type de librairie. En informant `A`, la détection se fait automatiquement !
 
 Ce qui est important lors du lancement de salmon quant, c'est de bien regarder les sorties terminales (ou le log si vous les avez redirigées) notamment la ligne où il est indiquée :  [date] `[jointLog] [info] Automatically detected most likely library type as` [libtype].
 Dans notre cas, voici la ligne obtenue : `[2024-08-22 11:45:41.747] [jointLog] [info] Automatically detected most likely library type as ISR`.
 
-Ainsi, nos librairies sont `ISR`. Ce qui veut dire que :
-- les lectures pairées vont vers l'intérieur l'une de l'autre, soit une polarité fr
-- les lectures sont strand spécifiques
-- la lecture 1 est reverse, elle dérive donc du brin ADN anti-sens et est donc la copie du brin sens. La spécifité de brin est firststrand
-
-De ce fait, nous pouvons dire que nos lectures sont **fr-firststrand**.
-Selon l'outil utilisé, voici donc l'option à renseigner (https://rnabio.org/module-09-appendix/0009/12/01/StrandSettings/) : 
-
-![image](https://gist.github.com/user-attachments/assets/9acdcb99-db6a-44ed-82ff-7d8d22087d39)
-
+Ainsi, nos librairies sont `ISR`. De ce fait, nous pouvons dire que nos lectures sont **fr-firststrand**.
 
 ### 3.2. Contrôle qualité des lectures avant trimming
 
@@ -187,6 +109,7 @@ multiqc -i "Human RNAseq" \
         "$WORKDIR"/data_qc/qc_before_trimming/*fastq* 
 ```
 Ici, l'option :
+
 - `-t` permet de déterminer le nombre de threads
 - `-i` de caractériser le titre du raport MultiQC
 - `-b` le sous-titre du raport MultiQC
@@ -230,6 +153,7 @@ done
 ```
 
 Ici, l'option :
+
 - `-i` / `-I` permet de renseigner les fichiers FASTQ d'entrée
 - `-o` / `-O` permet de renseigner les fichiers FASTQ de sortie. NB : si un `.gz` est ajouté à la fin du nom du fichier, il est alors automatiquement compressé
 - `--unpaired1` / `--unpaired2` permet de renseigner les fichiers FASTQ de sortie unpaired.
@@ -285,6 +209,7 @@ gzip "$WORKDIR"/GCF_000001405.40_GRCh38.p14_genomic.fna
 ```
 
 Ici, l'option :
+
 - `-p` indique le nombre de threads à utiliser 
 - `-f` indique que la référence à indexer est un fichier FASTA
 
@@ -328,6 +253,7 @@ done
 
 
 Ici, l'option :
+
 - `-x` permet de renseigner les noms des fichiers index  
 - `-1` et `-2` indique les fichiers FASTQ R1 et R2 des lectures pairées
 - `-U` indique les fichiers FASTQ R1 et R2 des lectures non pairées
@@ -373,6 +299,7 @@ done
 ```
 
 L'option : 
+
 - `-G` indique un fichier GFF (GFF3) contenant des annotations de gènes (comme les exons et les gènes) qui vont servir de guide pour l'assemblage. Cela permet à StringTie de mieux assembler les transcrits en se basant sur des annotations connues.
 - `--rf` pour informer que les données sont fr-firststrand
 - `-p` pour le nombre de threads
@@ -414,6 +341,7 @@ done
 ```
 
 Ici, l'option : 
+
 - `-e` indique à l'outil d'estimer l'expression
 - `-A` pour dire que nous voulons le tableau avec l'abondance des gènes
 
@@ -430,7 +358,6 @@ Egalement, il peut y avoir une redondance de *Gene Name* car comme nous avons pr
 
 ![image](https://gist.github.com/user-attachments/assets/360b5fcf-27bd-484c-80c0-242105e0fbc6)
 
-
 ## 7. Analyse de l'expression différentielle
 
 ### 7.1. Création des matrices de comptes
@@ -443,6 +370,7 @@ python prepDE.py3 -i "$WORKDIR"/transcript_abundances -p sample -g "$WORKDIR"/tr
 ```
 
 L'option : 
+
 - `-i` renseigne le dossier où il faut aller chercher les estimations
 - `-p` indique le pattern des sous-dossier où se trouve les fichiers GTF avec les estimations
 - `-g` et `-t` servent juste à donner des noms aux fichiers de sorties CSV
@@ -470,6 +398,7 @@ sample_D2_mock_noSel_rep32	S0	mock	noSel	rep32
 ### 7.3. L'analyse d'expression différencielle
 
 Tous les fichiers sont prêts : 
+
 - le fichier avec les comptes 
 - le fichier avec les informations
 
@@ -541,3 +470,5 @@ resCondSh5Empty <- results(ddsCond, name="condition_shble5_vs_empty")
 resCondSh6Empty <- results(ddsCond, name="condition_shble6_vs_empty")
 resCondSh10Empty <- results(ddsCond, name="condition_shble10_vs_empty")
 ```
+
+Une fois les résultats créés, vous pouvez les enregistrer sous format .csv sur votre ordinateur.
