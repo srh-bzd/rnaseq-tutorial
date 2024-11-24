@@ -1,4 +1,4 @@
-# Nom de votre site
+# Nom du site
 site_name: Bioinfo training
 
 # Description facultative (utilisée dans les métadonnées et les moteurs de recherche)
@@ -13,10 +13,10 @@ repo_name: srh-bzd/bioinfo-training
 
 edit_uri: edit/main/docs/
 
-# Chemin du logo (optionnel, à ajouter dans 'docs/' ou un sous-dossier)
+# Chemin du logo
 # logo: images/logo.png
 
-# Thème Material (vous devez l'installer via `pip install mkdocs-material`)
+# Thème Material
 theme:
   name: material
   language: fr
@@ -24,12 +24,11 @@ theme:
     - navigation.tabs
     - navigation.expand
     - navigation.indexes
-    - header.autohide # "Range" le header quand on déroule
-    - announce.dismiss
+    - header.autohide
   palette:
     - scheme: default
-      primary: black # Couleur header
-      accent: blue # Lien
+      primary: black 
+      accent: blue 
       toggle:
         icon: material/lightbulb-night-outline
         name: Mode sombre
@@ -49,22 +48,21 @@ theme:
     - navigation.tabs
     - search.highlight
 
-# Configuration des plugins (inclut la recherche et les dates des révisions Git)
+# Configuration des plugins
 plugins:
   - search
   - git-revision-date-localized:
       fallback_to_build_date: true
 
-# Extensions Markdown (activent des fonctionnalités supplémentaires)
+# Extensions Markdown
 markdown_extensions:
-  - admonition      # Pour créer des boîtes d'informations, avertissements, etc.
-  - tables          # Support avancé pour les tableaux
-  - toc             # Table des matières automatique
-  - codehilite      # Mise en surbrillance du code
-  - pymdownx.extra  # Collection d'extensions Markdown utiles
-  - pymdownx.snippets  # Réutilisation de fragments de code
+  - tables          
+  - toc             
+  - codehilite     
+  - pymdownx.extra  
+  - pymdownx.snippets  
 
-# Structure de la navigation (liée aux fichiers Markdown dans le dossier `docs/`)
+# Structure de la navigation
 nav:
   - Accueil: index.md
   - Cours : 
@@ -73,9 +71,9 @@ nav:
   - Tutoriels : 
     - Vue d'ensemble : training/training.md
     - Analyses :
-      - RNAseq : training/rnaseq-training.md
+      - RNAseq : training/analysis/rnaseq-training.md
     - Développement :
-      - MkDocs : training/mkdocs.md
+      - MkDocs : training/dev/mkdocs.md
   - Connaissances : 
     - Vue d'ensemble : knowledge/knowledge.md
     - Bases de données : 
@@ -89,7 +87,7 @@ nav:
       - Inférence du strandedness : knowledge/concepts/rnaseq-strandedness.md
   - À propos: about.md
 
-# Options d'exclusion (par exemple, ne pas inclure certains fichiers dans la génération)
+# Options d'exclusion
 exclude:
   - README.md
   - "*.tmp"
