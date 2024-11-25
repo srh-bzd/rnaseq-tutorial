@@ -111,7 +111,7 @@ theme:
       primary: black  # Couleur principale, ici le noir pour l'en-tête
       accent: blue  # Couleur d'accentuation, ici le bleu pour les liens
       toggle:
-        icon: material/lightbulb-night-outline  # Icône de mode sombre (ampoule éteinte)
+        icon: material/lightbulb-night-outline  # Icône de mode sombre (ampoule éteinte). 
         name: Mode sombre  # Texte pour l'activation du mode sombre
     - scheme: slate  # Un autre schéma de couleurs (Slate, une teinte grise)
       primary: black  # Couleur principale (noir)
@@ -149,6 +149,42 @@ Ensuite, nous allons modifier le fichier *index.md* :
 Voici un site fait en MkDocs !
 ```
 
+## Modifier la structure du site 
+
+Pour le moment, notre site web n'a qu'une seule page. Nous allons en ajouter dans de nouveaux onglets.
+
+Pour ça, nous allons créer et placer les nouvelles pages dans le dossier /docs à l'intérieur de nouveaux dossiers. 
+Voici la structure dorénavant de notre site : 
+```
+mkdocs-website/
+│
+├── mkdocs.yml
+│
+└── docs/
+    ├── index.md
+    ├── onglet1/
+    │   ├── page1.md
+    │   └── page2.md
+    ├── onglet2/
+    │   ├── page3.md
+    │   └── sous-onglet/
+    │       └── page4.md
+```
+
+Dans le fichier *mkdocs.yml*, nous allons étayer la partie *nav* afin de renseigner cette nouvelle structure : 
+```
+# Structure de la navigation (liée aux fichiers Markdown dans le dossier `docs/`)
+nav:
+  - Accueil: index.md
+  - Onglet1 : 
+    - Page1 : onglet1/page1.md
+    - Page2 : onglet1/page2.md
+  - Onglet2 : 
+    - Page3 : onglet2/page3.md
+    - Sous-onglet :
+      - Page4 : onglet2/sous-onglet/page4.md
+```
+
 ## Lancer le serveur de développement
 
 Notre site est prêt. Nous allons donc dorénavant le visualiser localement. 
@@ -159,4 +195,8 @@ mkdocs serve
 
 Cela lance un serveur local à l'adresse http://127.0.0.1:8000. Il est alors possible d'ouvrir un navigateur à cette adresse pour voir à quoi ressemble le site.
 
-![alt text](<mkdocs-website.png>)
+![alt text](img/mkdocs-website-acceuil.png)
+
+![alt text](img/mkdocs-website-onglet1.png)
+
+![alt text](img/mkdocs-website-onglet2.png)
