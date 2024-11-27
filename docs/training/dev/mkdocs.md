@@ -195,8 +195,8 @@ mkdocs serve
 
 Cela lance un serveur local à l'adresse http://127.0.0.1:8000. Il est alors possible d'ouvrir un navigateur à cette adresse pour voir à quoi ressemble le site.
 
-![alt text](img/mkdocs-website-acceuil.png)
+![alt text](../../img/mkdocs-website-acceuil.png)
 
-![alt text](img/mkdocs-website-onglet1.png)
+![alt text](../../img/mkdocs-website-onglet1.png)
 
-![alt text](img/mkdocs-website-onglet2.png)
+![alt text](../../img/mkdocs-website-onglet2.png)

@@ -82,8 +82,9 @@ nav:
       - Le transcriptome humain : knowledge/references/human-transcriptome.md
       - Le génome humain: knowledge/references/human-genome.md
       - Les annotations du génome humain : knowledge/references/human-annotations.md
-    - Concepts :
-      - Inférence du strandedness : knowledge/concepts/rnaseq-strandedness.md
+    - Outils :
+      - Inférence du strandedness : knowledge/tools/rnaseq-strandedness.md
+      - Biais d'assemblage : knowledge/tools/assembly-bias.md
   - À propos: about.md
 
 # Options d'exclusion
