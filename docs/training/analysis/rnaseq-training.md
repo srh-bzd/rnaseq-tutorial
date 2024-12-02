@@ -304,10 +304,7 @@ L'option :
 - `--rf` pour informer que les données sont fr-firststrand
 - `-p` pour le nombre de threads
 
-
-## 6. Quantification des transcrits et des gènes
-
-### 6.1. Création du transcriptome global
+### 5.3. Création du transcriptome global
 
 Pour chacun des échantillons, nous avons assemblé les transcriptomes avec les lectures. Maintenant, nous allons construire le transcriptome global en le générant avec l'ensemble non redondant des transcrits observés dans les échantillons. Pour effectuer cela, nous allons encore une fois utilisé StringTie mais le mode `--merge`. Ce mode prends en entrée une liste de GTF et renvoie un seul et unique GTF.
 
@@ -315,7 +312,21 @@ Pour chacun des échantillons, nous avons assemblé les transcriptomes avec les 
 stringtie --merge -G "$DIRREFS"/GCF_000001405.40_GRCh38.p14_genomic.agat.gff -o "$WORKDIR"/merged_transcriptomes.gtf "$WORKDIR"/data_assembly/*.gtf
 ```
 
-### 6.2. Estimation de l'abondance des transcripts et des gènes
+### 5.4. Comparaison du transcriptome global avec la référence
+
+Nous allons comparer le transcriptome global avec le GFF de référence afin de voir les correspondances et discordances. Dans ce cas, nous allons utiliser l'outil [GffCompare](https://ccb.jhu.edu/software/stringtie/gffcompare.shtml)(v0.12.6).
+
+```
+gffcompare -r "$DIRREFS"/GCF_000001405.40_GRCh38.p14_genomic.agat.gff "$WORKDIR"/merged_transcriptomes.gtf -o gffcompare_ref_vs_merged_transcriptome
+```
+
+Ici, l'option : 
+
+- `-r` indique le GFF de référence
+- `-o` le préfix à renseigner pour les fichiers de sortie
+
+
+## 6. Quantification des transcrits et des gènes
 
 Toujours avec StringTie, nous allons estimer les abondances des transcripts et générer un tableau avec l'abondance des gènes. Ainsi, nous allons donner en entrée les alignements triées que nous avions produit avec la combinaison HiSat2 - SAMtools précédemment et le transcriptome que nous venons de créer afin d'avoir pour chacun des échantillons les TPM.
 
