@@ -2,7 +2,7 @@
 
 Lorsque l'on effectue un assemblage de novo genome guided avec un outil comme [StringTie](https://ccb.jhu.edu/software/stringtie/index.shtml), il arrive que les résultats ne correspondent pas entièrement aux attentes biologiques. 
 
-Lors d'une analyse de transcrits issus d’un assemblage, une observation est survenue : tous les transcrits obtenus correspondaient à une fusion de deux gènes (*shble* et *eGFP*) même si le niveau de couverture entre ceux-ci était très inégal. En effet, la couverture de *shble* était nettement plus élevée que celle de *eGFP*. 
+Lors d'une analyse de transcrits issus d’un assemblage, nous avons pu observer que tous les transcrits obtenus correspondaient à une fusion de deux gènes (*shble* et *eGFP*) même si le niveau de couverture entre ceux-ci était très inégal. En effet, la couverture de *shble* était nettement plus élevée que celle de *eGFP*. 
 
 ![alt text](../../img/igv-cov-transcrits-assembly.png)
 
