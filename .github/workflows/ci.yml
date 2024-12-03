@@ -1,0 +1,37 @@
+name: Deploy MkDocs
+
+on:
+  push:
+    branches:
+      - main # Déclenche l'action uniquement pour les commits poussés sur la branche main.
+
+permissions:
+  contents: write # Nécessaire pour publier sur GitHub Pages.
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Vérifier le code source.
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+    # 2. Configurer Python.
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+
+    # 3. Installer les dépendances.
+      - name: Install Dependencies
+        run: |
+          pip install mkdocs-material
+          pip install pymdown-extensions
+          pip install mkdocs-minify-plugin
+          pip install mkdocs-macros-plugin
+          pip install mkdocs-include-markdown-plugin
+
+    # 4. Déployer avec MkDocs.
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force

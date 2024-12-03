@@ -10,7 +10,6 @@ site_url: https://srh-bzd.github.io/bioinfo-training
 # URL et nom du repo
 repo_url: https://github.com/srh-bzd/bioinfo-training
 repo_name: srh-bzd/bioinfo-training
-
 edit_uri: edit/main/docs/
 
 # Chemin du logo
