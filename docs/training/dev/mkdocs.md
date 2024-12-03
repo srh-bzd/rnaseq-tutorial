@@ -200,3 +200,80 @@ Cela lance un serveur local à l'adresse http://127.0.0.1:8000. Il est alors pos
 ![alt text](../../img/mkdocs-website-onglet1.png)
 
 ![alt text](../../img/mkdocs-website-onglet2.png)
+
+## Déployer le site sur GitHub
+
+Nous avons vu notre site est comme nous le souhaitons en local. Maintenant, nous allons donc le déployer sur GitHub pour qu'il soit accessible à toutes et tous.
+
+### Configurer les fichiers locaux
+
+En premier lieu, nous allons rajouter une ligne dans le fichier `mkdocs.yml`. 
+```
+# URL publique où le site est accessible après déploiement
+site_url: https://srh-bzd.github.io/mkdocs-website
+```
+
+Puis, nous allons créer un répertoire `.github` avec comme sous répertoire `workflows` à la racine du projet
+```
+mkdir -p .github/workflows
+```
+
+Dans le répertoire `workflows`, nous allons ajouter le fichier `ci.yml` dont le contenu est :
+```
+name: Deploy MkDocs
+
+on:
+  push:
+    branches:
+      - main # Déclenche l'action uniquement pour les commits poussés sur la branche main.
+
+permissions:
+  contents: write # Nécessaire pour publier sur GitHub Pages.
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Vérifier le code source.
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+    # 2. Configurer Python.
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+
+    # 3. Installer les dépendances.
+      - name: Install Dependencies
+        run: |
+          pip install mkdocs-material
+          pip install pymdown-extensions
+          pip install mkdocs-minify-plugin
+          pip install mkdocs-macros-plugin
+          pip install mkdocs-include-markdown-plugin
+
+    # 4. Déployer avec MkDocs.
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force
+```
+
+La structure du site devient de la forme :
+```
+mkdocs-website/
+├── docs/
+├── .github/workflows
+|    └── ci.yml
+└── mkdocs.yml
+```
+
+### Configurer le répertoire GitHub
+
+Sur Git, nous allons créer un nouveau répertoire *mkdocs-website*. Assurez-vous que le répertoire est bien *Public*. Puis, nous allons ajouter tout notre répertoire de travail local sur Git. 
+
+Une fois tout cela réalisé, il est temps de déployer le site. Pour ce faire, dans *Setting* --> *Pages* --> *Branch* choisissez *gh-pages* et */(root)* puis cliquez sur *Save*. 
+
+Si tout s'est bien déroulé, dans *Code*, à côté de votre nom Git et du dernier commit, apparaitra un check vert. 
+
+Il est possible maintenant d'aller sur l'URL renseigné dans le fichier *mkdocs.yml*
