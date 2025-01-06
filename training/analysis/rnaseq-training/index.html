@@ -1,0 +1,1870 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://srh-bzd.github.io/bioinfo-training/training/analysis/rnaseq-training/">
+      
+      
+        <link rel="prev" href="../../training/">
+      
+      
+        <link rel="next" href="../../dev/mkdocs/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>RNAseq - Bioinfo training</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lanalyse-rnaseq-tutoriel" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../../.." title="Bioinfo training" class="md-header__button md-logo" aria-label="Bioinfo training" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bioinfo training
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RNAseq
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="Mode sombre"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Mode sombre" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 20h6v1c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1zm5-5.11V16H7v-2.42C5.23 12.81 4 11.05 4 9c0-2.76 2.24-5 5-5 .9 0 1.73.26 2.46.67.54-.47 1.2-.86 1.89-1.17C12.16 2.57 10.65 2 9 2 5.13 2 2 5.13 2 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-.68c-.75-.36-1.43-.82-2-1.43m9.92-4.95-.5-1.64 1.3-1.08-1.68-.04-.63-1.58-.56 1.61-1.68.11 1.33 1.03-.4 1.65 1.4-.97zm-1.8 2.31a4.62 4.62 0 0 1-3.27-2.28c-.73-1.26-.8-2.72-.35-4 .14-.34-.16-.68-.5-.63-3.44.66-5 4.79-2.78 7.61 1.81 2.24 5.28 2.32 7.17.05.23-.26.08-.7-.27-.75"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue"  aria-label="Mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/srh-bzd/bioinfo-training" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    srh-bzd/bioinfo-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../lessons/lessons/" class="md-tabs__link">
+          
+  
+  Cours
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../training/" class="md-tabs__link">
+          
+  
+  Tutoriels
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../knowledge/knowledge/" class="md-tabs__link">
+          
+  
+  Connaissances
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+    
+  
+  À propos
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Bioinfo training" class="md-nav__button md-logo" aria-label="Bioinfo training" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Bioinfo training
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/srh-bzd/bioinfo-training" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    srh-bzd/bioinfo-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Accueil
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Cours
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Cours
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lessons/lessons/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vue d'ensemble
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lessons/rnaseq-lesson/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RNAseq
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Tutoriels
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tutoriels
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../training/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vue d'ensemble
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Analyses
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Analyses
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    RNAseq
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    RNAseq
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-telechargement-des-donnees-dinterets-les-lectures-arn" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Téléchargement des données d'intérêts : les lectures ARN
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Téléchargement des données d'intérêts : les lectures ARN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-recuperation-des-noms-sra" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. Récupération des noms SRA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-telechargement-des-sra" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Téléchargement des SRA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-obtention-des-fastq-lies-aux-sra" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3. Obtention des FASTQ liés aux SRA
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-telechargement-des-fichiers-dinterets-les-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Téléchargement des fichiers d'intérêts : les références
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Téléchargement des fichiers d'intérêts : les références">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-le-transcriptome-de-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Le transcriptome de référence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-le-genome-de-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. Le génome de référence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-le-gtf" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3. Le GTF
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-preparation-des-lectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Préparation des lectures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Préparation des lectures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-inference-du-strandedness" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. Inférence du strandedness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-controle-qualite-des-lectures-avant-trimming" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. Contrôle qualité des lectures avant trimming
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-trimming-des-lectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3. Trimming des lectures
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-controle-qualite-des-lectures-apres-trimming" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4. Contrôle qualité des lectures après trimming
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-alignement-des-lectures-viables" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Alignement des lectures viables
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Alignement des lectures viables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-indexation-du-genome-de-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1. Indexation du génome de référence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-alignement-contre-le-genome-indexe" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2. Alignement contre le génome indexé
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-assemblage-des-transcriptomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Assemblage des transcriptomes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Assemblage des transcriptomes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-preparation-du-gtfgff" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1. Préparation du GTF/GFF
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-assemblage-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2. Assemblage guidé
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-creation-du-transcriptome-global" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3. Création du transcriptome global
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-comparaison-du-transcriptome-global-avec-la-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4. Comparaison du transcriptome global avec la référence
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-quantification-des-transcrits-et-des-genes" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Quantification des transcrits et des gènes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-analyse-de-lexpression-differentielle" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Analyse de l'expression différentielle
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Analyse de l'expression différentielle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-creation-des-matrices-de-comptes" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1. Création des matrices de comptes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-preparation-de-la-matrice-dinformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2. Préparation de la matrice d'informations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-lanalyse-dexpression-differencielle" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3. L'analyse d'expression différencielle
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Développement
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Développement
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MkDocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Visualisation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Visualisation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../visualization/venn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Diagramme de Venn
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Connaissances
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Connaissances
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../knowledge/knowledge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vue d'ensemble
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Bases de données
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Bases de données
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../knowledge/databases/refseq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RefSeq
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Références
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Références
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../knowledge/references/human-transcriptome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Le transcriptome humain
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../knowledge/references/human-genome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Le génome humain
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../knowledge/references/human-annotations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Les annotations du génome humain
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Outils
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Outils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../knowledge/tools/rnaseq-strandedness/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inférence du strandedness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../knowledge/tools/assembly-bias/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Biais d'assemblage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    À propos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="lanalyse-rnaseq-tutoriel">L'analyse RNAseq - Tutoriel</h1>
+<p>Dans cette exemple d'analyse RNAseq, nous allons utiliser des données d'expression short-reads de cellule humaine HEK293 accessibles sous le BioProject <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA753061/">PRJNA753061</a>.</p>
+<h2 id="1-telechargement-des-donnees-dinterets-les-lectures-arn">1. Téléchargement des données d'intérêts : les lectures ARN</h2>
+<p>Pour pouvoir télécharger les lectures, nous allons utiliser <a href="https://github.com/ncbi/sra-tools">SRA Toolkit</a>. Mais en premier, pour faciliter "l'automatisation" du téléchargement des données, nous allons récupérer la liste des accessions des SRA. </p>
+<h3 id="11-recuperation-des-noms-sra">1.1. Récupération des noms SRA</h3>
+<ul>
+<li>Aller à l'adresse du BioProject</li>
+<li>Cliquer sur <em>SRA</em> dans le menu <em>Related information</em> ou dans le tableau <em>Project Data</em> cliquer sur le <em>Number of Links</em> correspondant au nombre total de SRA</li>
+<li>Dans le menu déroulant <em>Send to</em> choisir <em>File</em> puis <em>Accession List</em> et valider avec <em>Create File</em></li>
+</ul>
+<p>Un fichier au nom <em>SraAccList.csv</em> a été créé.</p>
+<h3 id="12-telechargement-des-sra">1.2. Téléchargement des SRA</h3>
+<ul>
+<li>Installer SRA toolkit</li>
+<li>Avec l'outil lancer la ligne de commande : 
+<code>prefetch --option-file path/to/SraAccList.csv -O path/to/output/folder</code>, cela permet de récupérer les fichiers <em>.sra</em></li>
+</ul>
+<p>Warning, pour deux SRA (SRR15376509, SRR15376518) le message d'erreur suivant est renvoyé :
+<div class="highlight"><pre><span></span><code>2024-08-19T10:10:23 prefetch.2.5.7 err: name incorrect while evaluating path within network system module - Scheme is &#39;https&#39;
+2024-08-19T10:10:23 prefetch.2.5.7 err: path not found while resolving tree within virtual file system module - &#39;SRR15376509&#39; cannot be found.
+</code></pre></div>
+Pour palier à cela, il faut se rendre directement sur la page du SRA via le navigateur de recherche du <a href="https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&amp;display=metadata">SRA Run Browser</a>. Puis récupérer dans la section <em>Data access</em> et la sous-section <em>SRA archive data</em> l'adresse http afin de faire un <code>wget</code>.</p>
+<h3 id="13-obtention-des-fastq-lies-aux-sra">1.3. Obtention des FASTQ liés aux SRA</h3>
+<ul>
+<li>Dans le dossier où il y a tous les dossiers SRA, rentrer la ligne de commande : <code>for dir in SRR*; do fastq-dump --split-3 --skip-technical --gzip "$dir"/"$dir".sra; done</code>, cela permet d'avoir les fichiers FASTQ paired-end _1 et _2 et unpaired compressés (voir la figure ci-dessous provenant du HowTo de <a href="https://github.com/ncbi/sra-tools/wiki/HowTo:-fasterq-dump">fasterq-dump</a> qui est un fastq-dump plus rapide mais sans la possibilité de compresser directement les fichiers)</li>
+<li>Supprimer les dossiers SRA pour alléger le volume données</li>
+</ul>
+<p>Attention, après cette étape les <em>_1</em> et <em>_2</em> des noms des fichiers FASTQ ont été renommés en <em>_R1</em> et <em>_R2</em>.</p>
+<h2 id="2-telechargement-des-fichiers-dinterets-les-references">2. Téléchargement des fichiers d'intérêts : les références</h2>
+<h3 id="21-le-transcriptome-de-reference">2.1. Le transcriptome de référence</h3>
+<p>Nous allons télécharger le transcriptome humain de référence depuis le genome assemblé <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.40/">GRCh38</a> (étant à ce jour la dernière version).</p>
+<ul>
+<li>Aller sur la page du génome assemblé</li>
+<li>Cliquer sur l'onglet <em>FTP</em></li>
+<li>Une liste d'<em>Index of /genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14</em> sera proposée (https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/)</li>
+<li>Choisir <em>GCF_000001405.40_GRCh38.p14_rna.fna.gz</em></li>
+</ul>
+<h3 id="22-le-genome-de-reference">2.2. Le génome de référence</h3>
+<p>Tout comme le transcriptome de référence, nous allons également prendre en possession le génome humain de référence.</p>
+<ul>
+<li>Aller sur la page du génome assemblé <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.40/">GRCh38</a></li>
+<li>Sélectionner l'onglet <em>FTP</em></li>
+<li>Une liste d'Index of /genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14 sera proposée (https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/)</li>
+<li>Choisir <em>GCF_000001405.40_GRCh38.p14_genomic.fna.gz</em></li>
+</ul>
+<h3 id="23-le-gtf">2.3. Le GTF</h3>
+<p>Nous allons récupérer les annotations génomiques du génome humain.</p>
+<ul>
+<li>Aller sur la page du génome assemblé <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.40/">GRCh38</a></li>
+<li>Sélectionner l'onglet <em>FTP</em></li>
+<li>Une liste d'Index of /genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14 sera proposée (https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/)</li>
+<li>Choisir <em>GCF_000001405.40_GRCh38.p14_genomic.gtf.gz</em></li>
+</ul>
+<h2 id="3-preparation-des-lectures">3. Préparation des lectures</h2>
+<h3 id="31-inference-du-strandedness">3.1. Inférence du strandedness</h3>
+<p>Nous allons déterminer les spécifités des librairies avec Salmon (v1.10.1) et le transcriptome de référence pour pouvoir renseigner correctement les paramètres d'outils.
+Puisque les données ont été séquencées au même moment par le même séquenceur avec la même préparation de librairie, nous n'avons pas besoin d'effectuer cette manipulation pour chaque SRA.
+Voici les lignes de commande : 
+<div class="highlight"><pre><span></span><code>WORKDIR=path/of/work/directory
+gunzip &quot;$WORKDIR&quot;/GCF_000001405.40_GRCh38.p14_rna.fna.gz
+
+# Index human transcriptome
+salmon index -t &quot;$WORKDIR&quot;/GCF_000001405.40_GRCh38.p14_rna.fna -i &quot;$WORKDIR&quot;/GCF_000001405.40_GRCh38.p14_rna.index -k 31
+
+# Run quant for having librarie type
+salmon quant -i &quot;$WORKDIR&quot;/GCF_000001405.40_GRCh38.p14_rna.index -l A -1 &quot;$WORKDIR&quot;/SRR15376509_R1.fastq.gz -2 &quot;$WORKDIR&quot;/SRR15376509_R2.fastq.gz --validateMappings -o &quot;$WORKDIR&quot;/salmon_for_libtype 
+
+gzip &quot;$WORKDIR&quot;/GCF_000001405.40_GRCh38.p14_rna.fna
+</code></pre></div></p>
+<p>Ici, l'option :</p>
+<ul>
+<li><code>-l</code> permet de renseigner le type de librairie. En informant <code>A</code>, la détection se fait automatiquement !</li>
+</ul>
+<p>Ce qui est important lors du lancement de salmon quant, c'est de bien regarder les sorties terminales (ou le log si vous les avez redirigées) notamment la ligne où il est indiquée :  [date] <code>[jointLog] [info] Automatically detected most likely library type as</code> [libtype].
+Dans notre cas, voici la ligne obtenue : <code>[2024-08-22 11:45:41.747] [jointLog] [info] Automatically detected most likely library type as ISR</code>.</p>
+<p>Ainsi, nos librairies sont <code>ISR</code>. De ce fait, nous pouvons dire que nos lectures sont <strong>fr-firststrand</strong>.</p>
+<h3 id="32-controle-qualite-des-lectures-avant-trimming">3.2. Contrôle qualité des lectures avant trimming</h3>
+<p>Avant de débuter les analyses des lectures, nous allons réaliser un contrôle qualité des lectures.
+Pour ce faire, <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> (v0.11.9) et <a href="https://multiqc.info/">MultiQC</a> (v1.9) sont utilisés. FastQC permet de faire un rapport contrôle qualité sur chacun des fichiers FASTQ là où MultiQC permet de regrouper tous les rapports en un.
+Voici les lignes de commande :
+<div class="highlight"><pre><span></span><code>mkdir &quot;$WORKDIR&quot;/data_qc
+mkdir &quot;$WORKDIR&quot;/data_qc/qc_before_trimming
+fastqc &quot;$WORKDIR&quot;/*fastq* -t 16 -o &quot;$WORKDIR&quot;/data_qc/qc_before_trimming
+multiqc -i &quot;Human RNAseq&quot; \
+        -b &quot;Quality control report before trimming step&quot; \
+        -n RNAseq_wo_trimming_report \
+        -o &quot;$WORKDIR&quot;/data_qc/qc_before_trimming \
+        &quot;$WORKDIR&quot;/data_qc/qc_before_trimming/*fastq* 
+</code></pre></div>
+Ici, l'option :</p>
+<ul>
+<li><code>-t</code> permet de déterminer le nombre de threads</li>
+<li><code>-i</code> de caractériser le titre du raport MultiQC</li>
+<li><code>-b</code> le sous-titre du raport MultiQC</li>
+<li><code>-n</code> le nom du fichier contenant le raport MultiQC</li>
+</ul>
+<h3 id="33-trimming-des-lectures">3.3. Trimming des lectures</h3>
+<p>Dans le but d'avoir des lectures viables pour les analyses, nous effectuons un trimming. Cette étape est essentielle car elle permet l'élimination des adaptateurs et les portions de lectures de mauvaise qualité. Nous utilisons <a href="https://github.com/OpenGene/fastp?tab=readme-ov-file">fastp</a> (v0.20.1) comme outil qui permet de faire le trimming des adaptateurs, le filtre de qualité mais aussi pas mal de choses de façon très rapide. 
+<div class="highlight"><pre><span></span><code># Declare a array with all samples names
+declare -a SAMPLES
+SAMPLES=(
+    &#39;Name_sample_1&#39;
+    &#39;Name_sample_2&#39;
+    &#39;Name_sample_3&#39;
+)
+
+THREADS=16
+
+mkdir &quot;$WORKDIR&quot;/data_trimmed
+mkdir &quot;$WORKDIR&quot;/data_trimmed/fastp_report
+
+# For each samples names in the array
+for i in ${!SAMPLES[@]}
+do
+    echo -e &quot;*---------- TRIMMING STEP WITH FASTP : ${SAMPLES[$i]}&quot;
+    # Make fastp
+    fastp -i &quot;$WORKDIR&quot;/&quot;${SAMPLES[$i]}&quot;_R1.fastq.gz \
+          -o &quot;$WORKDIR&quot;/data_trimmed/&quot;${SAMPLES[$i]}&quot;_R1.trim.fastq.gz \
+          -I &quot;$WORKDIR&quot;/&quot;${SAMPLES[$i]}&quot;_R2.fastq.gz \
+          -O &quot;$WORKDIR&quot;/data_trimmed/&quot;${SAMPLES[$i]}&quot;_R2.trim.fastq.gz \
+          --unpaired1 &quot;$WORKDIR&quot;/data_trimmed/&quot;${SAMPLES[$i]}&quot;_R1_unpaired.trim.fastq.gz \
+          --unpaired2 &quot;$WORKDIR&quot;/data_trimmed/&quot;${SAMPLES[$i]}&quot;_R2_unpaired.trim.fastq.gz \
+          --detect_adapter_for_pe \
+          -j &quot;$WORKDIR&quot;/data_trimmed/fastp_report/&quot;${SAMPLES[$i]}&quot;_fastp.json \
+          -h &quot;$WORKDIR&quot;/data_trimmed/fastp_report/&quot;${SAMPLES[$i]}&quot;.html \
+          -R &quot;fastp report for ${SAMPLES[$i]}&quot; \
+          -w &quot;$THREADS&quot; \
+          --cut_right
+done
+</code></pre></div></p>
+<p>Ici, l'option :</p>
+<ul>
+<li><code>-i</code> / <code>-I</code> permet de renseigner les fichiers FASTQ d'entrée</li>
+<li><code>-o</code> / <code>-O</code> permet de renseigner les fichiers FASTQ de sortie. NB : si un <code>.gz</code> est ajouté à la fin du nom du fichier, il est alors automatiquement compressé</li>
+<li><code>--unpaired1</code> / <code>--unpaired2</code> permet de renseigner les fichiers FASTQ de sortie unpaired.</li>
+<li><code>--detect_adapter_for_pe</code> pour activer la détection automatique de la séquence d'adaptateurs</li>
+<li><code>-j</code> pour renommer le rapport JSON </li>
+<li><code>-h</code> pour renommer le rapport HTML</li>
+<li><code>-R</code> pour redéfinir le titre du rapport  </li>
+<li><code>-w</code> caractérise le nombre de threads à utiliser</li>
+<li><code>--cut_right</code> permet de déplacez une fenêtre glissante d'avant en arrière et si une fenêtre avec une qualité moyenne &lt; threshold est rencontrée, la lecture est coupée à partir de la fenêtre. La taille de la fenêtre et le threshold de qualité sont conservés par défaut, soit 4 et 20. Cette option est similaire à <code>SLIDINGWINDOW:4:20</code> de <a href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a>.</li>
+</ul>
+<h3 id="34-controle-qualite-des-lectures-apres-trimming">3.4. Contrôle qualité des lectures après trimming</h3>
+<p>Pour voir si le trimming s'est bien passé, nous réalisons un contrôle qualité post-trimming. De la même façon que précedemment, FastQC et MultiQC sont utilisés.
+<div class="highlight"><pre><span></span><code>WORKDIR=path/of/work/directory
+mkdir &quot;$WORKDIR&quot;/data_qc/qc_after_trimming
+fastqc &quot;$WORKDIR&quot;/data_trimmed/*fastq* -t 16 -o &quot;$WORKDIR&quot;/data_qc/qc_after_trimming
+multiqc -i &quot;Human RNAseq&quot; \
+        -b &quot;Quality control report after trimming step&quot; \
+        -n RNAseq_trimming_report \
+        -o &quot;$WORKDIR&quot;/data_qc/qc_after_trimming \
+        &quot;$WORKDIR&quot;/data_qc/qc_after_trimming/*fastq* 
+</code></pre></div></p>
+<p>Egalement, pour rassembler tous les logs de fastp en un seul, nous lançons MultiQC sur les fichiers de sortie JSON : 
+<div class="highlight"><pre><span></span><code>multiqc -i &quot;Human RNAseq&quot; \
+        -b &quot;Trimming report&quot; \
+        -n RNAseq_fastp_report \
+        -o &quot;$WORKDIR&quot;/data_trimmed/fastp_report \
+        &quot;$WORKDIR&quot;/data_trimmed/fastp_report/*.json
+</code></pre></div>
+Attention, il faut bien que le pattern <em>fastp</em> apparaisse dans le nom des fichiers JSON de fastp pour que MultiQC marche.</p>
+<h2 id="4-alignement-des-lectures-viables">4. Alignement des lectures viables</h2>
+<h3 id="41-indexation-du-genome-de-reference">4.1. Indexation du génome de référence</h3>
+<p>Avant d'aligner, il est essentiel d'indexer le génome de référence. Nous allons utiliser dans ce cas, mais également pour l'alignement plus tard, <a href="http://daehwankimlab.github.io/hisat2/manual/">HiSat2</a> (v2.2.1).</p>
+<p>HiSat2 index le génome avec un algorithme qui permet de faire un compromis entre le temps d'exécution et l'allocation de la mémoire. Le gros avantage est qu'il recherche automatiquement les paramètres pour aboutir à cet objectif. </p>
+<p>HiSat2 peut prendre en entrée le génome ou le transcriptome de référence. Mais, nous utiliserons le génome de référence pour éviter des alignements discordants. En effet, avec le transcriptome de référence, et notamment avec la présence des isoformes, il peut y avoir des multi-alignements et donc créer des discordances dans la quantification (sous-estimer ou sur-estimer un transcript) et dans l'assemblage de novo.</p>
+<div class="highlight"><pre><span></span><code>gunzip &quot;$WORKDIR&quot;/GCF_000001405.40_GRCh38.p14_genomic.fna.gz
+mkdir &quot;$WORKDIR&quot;/hisat2_index
+
+# Build genome index
+hisat2-build -p 16 -f &quot;$WORKDIR&quot;/GCF_000001405.40_GRCh38.p14_genomic.fna &quot;$WORKDIR&quot;/hisat2_index/GCF_000001405.40_GRCh38.p14_genomic
+
+gzip &quot;$WORKDIR&quot;/GCF_000001405.40_GRCh38.p14_genomic.fna
+</code></pre></div>
+<p>Ici, l'option :</p>
+<ul>
+<li><code>-p</code> indique le nombre de threads à utiliser </li>
+<li><code>-f</code> indique que la référence à indexer est un fichier FASTA</li>
+</ul>
+<h3 id="42-alignement-contre-le-genome-indexe">4.2. Alignement contre le génome indexé</h3>
+<p>Ici toujours, nous allons utiliser HiSat2 et le génome indexé préalablement pour pouvoir réaliser l'alignement des lectures trimmées contre ce dernier. Une fois le fichier d'alignement généré, nous trions les alignements dans l'ordre de position nucléotidique et compressons le fichier (de <a href="https://fr.wikipedia.org/wiki/SAM_(format_de_fichier)">SAM</a> vers <a href="https://fr.wikipedia.org/wiki/Binary_Alignment_Map">BAM</a>) avec <a href="http://www.htslib.org/">SAMtools</a> (v1.18)
+Le fait de trier nos alignements permet de poursuivre les analyses. Pour ce qui est de la compression, cela donne la possibilité de gagner en espace mémoire.</p>
+<div class="highlight"><pre><span></span><code># Declare a array with all samples names
+declare -a SAMPLES
+SAMPLES=(
+    &#39;Name_sample_1&#39;
+    &#39;Name_sample_2&#39;
+    &#39;Name_sample_3&#39;
+)
+
+THREADS=16
+
+mkdir &quot;$WORKDIR&quot;/data_aligned
+mkdir &quot;$WORKDIR&quot;/data_aligned/hisat2_report
+for i in ${!SAMPLES[@]}
+do
+    echo -e &quot;*---------- ALIGN WITH HISAT2 : ${SAMPLES[$i]}&quot;
+    hisat2 -x &quot;$WORKDIR&quot;/hisat2_index/GCF_000001405.40_GRCh38.p14_genomic \\
+           -1 &quot;$WORKDIR&quot;/data_trimmed/&quot;${SAMPLES[$i]}&quot;_R1.trim.fastq.gz \\
+           -2 &quot;$WORKDIR&quot;/data_trimmed/&quot;${SAMPLES[$i]}&quot;_R2.trim.fastq.gz \\
+           -U &quot;$WORKDIR&quot;/data_trimmed/&quot;${SAMPLES[$i]}&quot;_R1_unpaired.trim.fastq.gz,&quot;$WORKDIR&quot;/data_trimmed/&quot;${SAMPLES[$i]}&quot;_R2_unpaired.trim.fastq.gz \\
+           -S &quot;$WORKDIR&quot;/data_aligned/&quot;${SAMPLES[$i]}&quot;.sam \\
+           --rna-strandness RF \\
+           --downstream-transcriptome-assembly \\
+           --summary-file &quot;$WORKDIR&quot;/data_aligned/hisat2_report/&quot;${SAMPLES[$i]}&quot;.hisat2.txt \\
+           -p &quot;$THREADS&quot;
+
+    echo -e &quot;*---------- SORT AND COMPRESS WITH SAMTOOLS : ${SAMPLES[$i]}&quot;
+    samtools sort &quot;$WORKDIR&quot;/data_aligned/&quot;${SAMPLES[$i]}&quot;.sam -@ &quot;$THREADS&quot; -o &quot;$WORKDIR&quot;/data_aligned/&quot;${SAMPLES[$i]}&quot;.sort.bam -O bam
+
+    rm &quot;$WORKDIR&quot;/data_aligned/&quot;${SAMPLES[$i]}&quot;.sam
+done
+</code></pre></div>
+<p>Ici, l'option :</p>
+<ul>
+<li><code>-x</code> permet de renseigner les noms des fichiers index  </li>
+<li><code>-1</code> et <code>-2</code> indique les fichiers FASTQ R1 et R2 des lectures pairées</li>
+<li><code>-U</code> indique les fichiers FASTQ R1 et R2 des lectures non pairées</li>
+<li><code>-S</code> désigne le fichier SAM contenant les alignements à créer </li>
+<li><code>--rna-strandness</code> renseigne le type de librairie des lectures</li>
+<li><code>--downstream-transcriptome-assembly</code> est une option utile pour l'assemblage car elle permet de conserver les lectures avec un long ancrage</li>
+<li><code>-p</code> détermine le nombre de threads à utiliser</li>
+</ul>
+<h2 id="5-assemblage-des-transcriptomes">5. Assemblage des transcriptomes</h2>
+<h3 id="51-preparation-du-gtfgff">5.1. Préparation du GTF/GFF</h3>
+<p>Lorsque nous allons assembler le transcriptome, nous allons avoir besoin du GTF pour guider l'assemblage. Mais avant de faire cela, il est important de vérifier notre fichier GTF et de le corriger si jamais. Pour cela, nous utilisons <a href="https://github.com/NBISweden/AGAT">AGAT</a> (v1.4.0) un outil spécialisé dans les GTF/GFF.</p>
+<p><div class="highlight"><pre><span></span><code>agat_convert_sp_gxf2gxf.pl -g &quot;$WORKDIR&quot;/GCF_000001405.40_GRCh38.p14_genomic.gtf.gz -o &quot;$WORKDIR&quot;/GCF_000001405.40_GRCh38.p14_genomic.agat.gff
+</code></pre></div>
+Par défaut, le fichier de sortie est au format GFF mais il est possible de changer les configs. Pour la suite, ce n'est pas génant que le fichier soit un GFF.</p>
+<h3 id="52-assemblage-guide">5.2. Assemblage guidé</h3>
+<p>Les alignements ainsi que le GFF sont prêts, nous allons donc réaliser les assemblages des transcriptomes. Pour le faire, nous utiliserons l'outil <a href="https://ccb.jhu.edu/software/stringtie/">StringTie</a> (v2.2.3) qui est un assembleur rapide et efficace d'alignements RNAseq en transcripts potentiels.</p>
+<div class="highlight"><pre><span></span><code># Declare a array with all samples names
+declare -a SAMPLES
+SAMPLES=(
+    &#39;Name_sample_1&#39;
+    &#39;Name_sample_2&#39;
+    &#39;Name_sample_3&#39;
+)
+
+THREADS=16
+
+mkdir -p &quot;$WORKDIR&quot;/data_assembly
+
+echo -e &quot;*---------- ASSEMBLY SAMPLES&quot;
+for i in ${!SAMPLES[@]}
+do
+    echo -e &quot;*---------- ASSEMBLY WITH STRINGTIE : ${SAMPLES[$i]}&quot;
+    stringtie -G &quot;$DIRREFS&quot;/GCF_000001405.40_GRCh38.p14_genomic.agat.gff -o &quot;$WORKDIR&quot;/data_assembly/&quot;${SAMPLES[$i]}&quot;.gtf -p &quot;$THREADS&quot; --rf &quot;$WORKDIR&quot;/data_aligned/&quot;${SAMPLES[$i]}&quot;.sort.bam
+done
+</code></pre></div>
+<p>L'option : </p>
+<ul>
+<li><code>-G</code> indique un fichier GFF (GFF3) contenant des annotations de gènes (comme les exons et les gènes) qui vont servir de guide pour l'assemblage. Cela permet à StringTie de mieux assembler les transcrits en se basant sur des annotations connues.</li>
+<li><code>--rf</code> pour informer que les données sont fr-firststrand</li>
+<li><code>-p</code> pour le nombre de threads</li>
+</ul>
+<h3 id="53-creation-du-transcriptome-global">5.3. Création du transcriptome global</h3>
+<p>Pour chacun des échantillons, nous avons assemblé les transcriptomes avec les lectures. Maintenant, nous allons construire le transcriptome global en le générant avec l'ensemble non redondant des transcrits observés dans les échantillons. Pour effectuer cela, nous allons encore une fois utilisé StringTie mais le mode <code>--merge</code>. Ce mode prends en entrée une liste de GTF et renvoie un seul et unique GTF.</p>
+<div class="highlight"><pre><span></span><code>stringtie --merge -G &quot;$DIRREFS&quot;/GCF_000001405.40_GRCh38.p14_genomic.agat.gff -o &quot;$WORKDIR&quot;/merged_transcriptomes.gtf &quot;$WORKDIR&quot;/data_assembly/*.gtf
+</code></pre></div>
+<h3 id="54-comparaison-du-transcriptome-global-avec-la-reference">5.4. Comparaison du transcriptome global avec la référence</h3>
+<p>Nous allons comparer le transcriptome global avec le GFF de référence afin de voir les correspondances et discordances. Dans ce cas, nous allons utiliser l'outil <a href="https://ccb.jhu.edu/software/stringtie/gffcompare.shtml">GffCompare</a>(v0.12.6).</p>
+<div class="highlight"><pre><span></span><code>gffcompare -r &quot;$DIRREFS&quot;/GCF_000001405.40_GRCh38.p14_genomic.agat.gff &quot;$WORKDIR&quot;/merged_transcriptomes.gtf -o gffcompare_ref_vs_merged_transcriptome
+</code></pre></div>
+<p>Ici, l'option : </p>
+<ul>
+<li><code>-r</code> indique le GFF de référence</li>
+<li><code>-o</code> le préfix à renseigner pour les fichiers de sortie</li>
+</ul>
+<h2 id="6-quantification-des-transcrits-et-des-genes">6. Quantification des transcrits et des gènes</h2>
+<p>Toujours avec StringTie, nous allons estimer les abondances des transcripts et générer un tableau avec l'abondance des gènes. Ainsi, nous allons donner en entrée les alignements triées que nous avions produit avec la combinaison HiSat2 - SAMtools précédemment et le transcriptome que nous venons de créer afin d'avoir pour chacun des échantillons les TPM.</p>
+<div class="highlight"><pre><span></span><code>declare -a SAMPLES
+SAMPLES=(
+    &#39;Name_sample_1&#39;
+    &#39;Name_sample_2&#39;
+    &#39;Name_sample_3&#39;
+)
+
+THREADS=16
+
+mkdir &quot;$WORKDIR&quot;/transcript_abundances
+
+echo -e &quot;*---------- TRANSCRIPT ABUNDANCES&quot;
+for i in ${!SAMPLES[@]}
+do
+    echo -e &quot;*---------- TRANSCRIPT ABUNDANCES WITH STRINGTIE : ${SAMPLES[$i]}&quot;
+    mkdir &quot;$WORKDIR&quot;/transcript_abundances/sample_&quot;${SAMPLES[$i]}&quot;
+    stringtie -e -A &quot;$WORKDIR&quot;/transcript_abundances/sample_&quot;${SAMPLES[$i]}&quot;/&quot;${SAMPLES[$i]}&quot;.tsv -G &quot;$WORKDIR&quot;/merged_transcriptomes.gtf -o &quot;$WORKDIR&quot;/transcript_abundances/sample_&quot;${SAMPLES[$i]}&quot;/&quot;${SAMPLES[$i]}&quot;.gtf -p &quot;$THREADS&quot; --rf &quot;$WORKDIR&quot;/data_aligned/&quot;${SAMPLES[$i]}&quot;.sort.bam
+done
+</code></pre></div>
+<p>Ici, l'option : </p>
+<ul>
+<li><code>-e</code> indique à l'outil d'estimer l'expression</li>
+<li><code>-A</code> pour dire que nous voulons le tableau avec l'abondance des gènes</li>
+</ul>
+<p>En sortie de l'option <code>-e</code>, nous obtenons un GTF, format que nous connaissons, avec tous les transcrits et leur TPM associé. Avec l'option <code>-A</code>, c'est un tableau tabulé avec l'abondance des gènes sous forme de TPM :</p>
+<p><img alt="image" src="https://gist.github.com/user-attachments/assets/21256cad-ee2d-488f-937a-39b4769f70ee" /></p>
+<p>Il faut noter que les TPM des gènes sont la somme des TPM des transcripts les constituants. Aussi, dans la colonne <em>Gene Name</em>, le nom du gène est reporté si connu. S'il n'est pas reporté, c'est que :
+- le gène présente au moins un nouveau transcripts que va au delà du <em>start</em> et du <em>end</em> du gène connu
+- la région est non annotée
+- il y a absence de correspondance</p>
+<p>Egalement, il peut y avoir une redondance de <em>Gene Name</em> car comme nous avons pris la version patchée du génome humain de référence le gène peut être présent sur un chromosome et sur un scaffold. Voici un exemple :</p>
+<p><img alt="image" src="https://gist.github.com/user-attachments/assets/360b5fcf-27bd-484c-80c0-242105e0fbc6" /></p>
+<h2 id="7-analyse-de-lexpression-differentielle">7. Analyse de l'expression différentielle</h2>
+<h3 id="71-creation-des-matrices-de-comptes">7.1. Création des matrices de comptes</h3>
+<p>Nous avons précédemment estimé les transcripts. Nous allons par la suite utiliser le package R <a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html">DESeq2</a> pour réaliser l'expression différentielle.
+Pour ce faire, nous devons d'abord transformer les sorties d'estimation d'abondance en entrée DESeq2 à l'aide du script python <code>prepDE.py</code> fourni par Stringtie.</p>
+<div class="highlight"><pre><span></span><code>python prepDE.py3 -i &quot;$WORKDIR&quot;/transcript_abundances -p sample -g &quot;$WORKDIR&quot;/transcript_abundances/prepDE_gene_count_matrix.csv -t &quot;$WORKDIR&quot;/transcript_abundances/prepDE_transcript_count_matrix.csv
+</code></pre></div>
+<p>L'option : </p>
+<ul>
+<li><code>-i</code> renseigne le dossier où il faut aller chercher les estimations</li>
+<li><code>-p</code> indique le pattern des sous-dossier où se trouve les fichiers GTF avec les estimations</li>
+<li><code>-g</code> et <code>-t</code> servent juste à donner des noms aux fichiers de sorties CSV</li>
+</ul>
+<p>A la fin de cette ligne de commande, nous aurons deux fichiers CSV prêts à être utilisés par DESeq2 : l'un relatant les comptes pour les transcrits et l'un pour les gènes. Il est important de noter, comme nous l'indique Stringtie, pour le compte des transcrits : </p>
+<blockquote>
+<p>prepDE.py derives hypothetical read counts for each transcript from the coverage values estimated by StringTie for each transcript, by using this simple formula: reads_per_transcript = coverage * transcript_len / read_len </p>
+</blockquote>
+<p>Les comptes des gènes, quant à eux, correspondent à la somme des <code>reads_per_transcript</code> les constituants. </p>
+<h3 id="72-preparation-de-la-matrice-dinformations">7.2. Préparation de la matrice d'informations</h3>
+<p>Les comptes sont prêts à être donnés à DESeq2, mais il manque encore une chose : la matrice des informations sur les échantillons. Celle-ci est indispensable dans notre analyse d'expression différencielle. Nous allons donc créer un fichier au format tabulé que nous appelerons <em>pheno_data.csv</em>.</p>
+<p>Voici quelques lignes du fichier : 
+<div class="highlight"><pre><span></span><code>sample  time    condition   selection   replica
+sample_D2_mock_noSel_rep43  S0  mock    noSel   rep43
+sample_D2_mock_noSel_rep41  S0  mock    noSel   rep41
+sample_D2_mock_noSel_rep33  S0  mock    noSel   rep33
+sample_D2_mock_noSel_rep32  S0  mock    noSel   rep32
+</code></pre></div></p>
+<h3 id="73-lanalyse-dexpression-differencielle">7.3. L'analyse d'expression différencielle</h3>
+<p>Tous les fichiers sont prêts : </p>
+<ul>
+<li>le fichier avec les comptes </li>
+<li>le fichier avec les informations</li>
+</ul>
+<p>Dorénavant, tout se fera sous R avec la librairie DESeq2. </p>
+<div class="highlight"><pre><span></span><code># Import libraries
+library(DESeq2)
+library(&quot;BiocParallel&quot;) # librarie to parallelize analysis
+register(MulticoreParam(4)) # number of cpu
+
+# Import gene count
+countData &lt;- read.csv(&quot;prepDE_gene_count_matrix.csv&quot;, row.names=&quot;gene_id&quot;)
+
+# Remove last line with total values
+countData &lt;- countData[-nrow(countData),]
+
+# Keep line where isn&#39;t only 0 values
+countData &lt;- countData[rowSums(countData != 0) &gt; 0, ]
+
+# Change the dataframe into a matrix
+countData &lt;- as.matrix(countData)
+
+# Import informations about data
+colData &lt;- read.csv(&quot;pheno_data.csv&quot;, sep=&quot;,&quot;, row.names=1)
+
+# Check
+all(rownames(colData) %in% colnames(countData))
+countData &lt;- countData[, rownames(colData)]
+all(rownames(colData) == colnames(countData))
+
+# Create dds object
+ddsCond &lt;- DESeqDataSetFromMatrix(countData = countData, colData = colData, design = ~ condition)
+
+# Filtering counts
+smallestGroupSize &lt;- 6 #choose the minimum redondance of a vector of informations
+keep &lt;- rowSums(counts(ddsCond) &gt;= 10) &gt;= smallestGroupSize
+ddsCond &lt;- ddsCond[keep,]
+
+# Calculate the variance stabilizing transformation
+vsdCond &lt;- vst(ddsCond, blind=FALSE)
+
+# PCA on vst results
+pdf(&quot;pca_ddscond_vst.pdf&quot;)
+plotPCA(vsdCond, intgroup = c(&quot;time&quot;))
+dev.off()
+
+# Run the default analysis of DESeq2
+ddsCond &lt;- DESeq(ddsCond, parallel=TRUE)
+
+# Save dds object
+saveRDS(ddsCond, &quot;DESeqDataSet.ddsTimeCond.rds&quot;)
+
+# View names of results comparisons
+resultsNames(ddsCond)
+# [1] &quot;Intercept&quot;                  &quot;condition_mock_vs_empty&quot;   
+# [3] &quot;condition_shble1_vs_empty&quot;  &quot;condition_shble10_vs_empty&quot;
+# [5] &quot;condition_shble2_vs_empty&quot;  &quot;condition_shble3_vs_empty&quot; 
+# [7] &quot;condition_shble4_vs_empty&quot;  &quot;condition_shble5_vs_empty&quot; 
+# [9] &quot;condition_shble6_vs_empty&quot;
+
+# Create results table of dds object
+resCondMockEmpty &lt;- results(ddsCond, name=&quot;condition_mock_vs_empty&quot;)
+resCondSh1Empty &lt;- results(ddsCond, name=&quot;condition_shble1_vs_empty&quot;)
+resCondSh2Empty &lt;- results(ddsCond, name=&quot;condition_shble2_vs_empty&quot;)
+resCondSh3Empty &lt;- results(ddsCond, name=&quot;condition_shble3_vs_empty&quot;)
+resCondSh4Empty &lt;- results(ddsCond, name=&quot;condition_shble4_vs_empty&quot;)
+resCondSh5Empty &lt;- results(ddsCond, name=&quot;condition_shble5_vs_empty&quot;)
+resCondSh6Empty &lt;- results(ddsCond, name=&quot;condition_shble6_vs_empty&quot;)
+resCondSh10Empty &lt;- results(ddsCond, name=&quot;condition_shble10_vs_empty&quot;)
+</code></pre></div>
+<p>Une fois les résultats créés, vous pouvez les enregistrer sous format .csv sur votre ordinateur.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.follow", "toc.integrate", "navigation.top", "content.code.copy", "navigation.tabs", "search.highlight"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
