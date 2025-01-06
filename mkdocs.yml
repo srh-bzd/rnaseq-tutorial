@@ -71,6 +71,8 @@ nav:
       - RNAseq : training/analysis/rnaseq-training.md
     - Développement :
       - MkDocs : training/dev/mkdocs.md
+    - Visualisation :
+      - Diagramme de Venn : training/visualization/venn.md
   - Connaissances : 
     - Vue d'ensemble : knowledge/knowledge.md
     - Bases de données : 
